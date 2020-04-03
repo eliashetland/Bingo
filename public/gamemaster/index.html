@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gamemaster</title>
+    <style>
+        button{
+        display: block;
+        margin: 0 auto;
+        }
+
+
+        #counter{
+        background-color: aquamarine;
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 60px;
+        font-size: 20px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        box-shadow: 1px 1px 4px #888888;
+        }
+        #liste{
+            display: block;
+            margin: 10px auto;
+            padding: 1px;
+
+            width: 80%;
+            text-align: center;
+            background-color: antiquewhite;
+            overflow: scroll;
+            height: 410px;
+            border-radius: 10px;
+        }
+   
+
+    </style>
+</head>
+<body>
+    <div id="counter">
+        <p id='tall'>0</p>
+    </div>
+    <button id='btn'>nytt tall</button>
+    <div id='liste'></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+
+        function createListPoint(text){
+            let liste = document.querySelector('#liste');
+            let oldNum = document.createElement('p');
+            oldNum.textContent = text;
+            liste.insertBefore(oldNum, liste.childNodes[0]);
+
+        }
+
+
+
+
+        
+        let a, brukt;
+        const p = document.querySelector('#tall');
+        const btn = document.querySelector('#btn');
+        btn.addEventListener('click', nyttTall);
+
+        const sock = io();
+     
+
+        function nyttSpill(){
+            a = [];
+            for (let i = 1; i < 76; i++) {
+                a.push(i);
+            }
+            brukt = [];
+        }
+
+        function nyttTall() {
+            if(a.length >= 1){
+                let r = Math.floor(Math.random() * a.length);
+                p.textContent = a[r];
+                brukt.unshift(a[r]);
+                let tall = a[r];
+                createListPoint(tall);
+                a.splice(r, 1);
+                sock.emit('message', brukt);
+            }else{
+                 p.textContent = 'Alle tallene er brukt opp';
+            }
+        }
+        nyttSpill();
+
+
+    
+    </script>
+
+
+
+
+    
+</body>
+</html>

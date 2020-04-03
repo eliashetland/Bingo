@@ -1,0 +1,64 @@
+
+
+
+td{
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.held{
+  background-color: aquamarine;
+}
+
+.notheld{
+  background-color: none;
+}
+
+table{
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto;
+}
+button{
+  display: block;
+  margin: 0 auto;
+}
+
+
+#counter{
+  background-color: aquamarine;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 4px #888888;
+}
+
+
+#liste{
+  display: block;
+  margin: 10px auto;
+  padding: 1px;
+  width: 80%;
+  text-align: center;
+  background-color: antiquewhite;
+  overflow: scroll;
+  height: 210px;
+  border-radius: 10px;
+
+}

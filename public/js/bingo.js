@@ -82,12 +82,11 @@ const sock = io();
 const p = document.querySelector('#tallet');
 let tidligere = [];
 
-sock.on('message', () => {
-  console.log(brukt);
-  p.textContent = brukt[0];
+sock.on('message', (text) => {
+  p.textContent = text[0];
   liste.innerHTML = '';
-  for (const punkt in brukt) {
-    createListPoint(brukt[punkt]);
+  for (const punkt in text) {
+    createListPoint(text[punkt]);
   }
   
 });

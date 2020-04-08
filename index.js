@@ -13,8 +13,16 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on('connection', (sock)=> {
-    sock.on('message', (text)=> {
-        io.emit('message', text)
+
+    sock.on('join_room', room =>{
+        sock.join(room);
+        console.log(room);
+    });
+
+
+    sock.on('message', ({brukt, room}) => {
+        sock.to(room).emit('message', brukt);
+        // io.emit('message', brukt) bruk denne for å kun ha ett rom
     });
 
 });

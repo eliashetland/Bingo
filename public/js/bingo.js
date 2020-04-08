@@ -1,6 +1,6 @@
 
 
-
+const login = document.querySelector('#login');
 const container = document.querySelector('#container');
 const btn = document.querySelector('#btn');
 
@@ -90,6 +90,24 @@ sock.on('message', (input) => {
   }
   
 });
+
+
+const roomP = document.querySelector('#roomP');
+const roomInp = document.querySelector('#roomInp');
+const roomBtn = document.querySelector('#roomBtn');
+
+roomBtn.onclick = () => {
+  let room = roomInp.value;
+  roomInp.value = '';
+  if(room == ''){
+    room = 000;
+  }
+  sock.emit('join_room', room);
+  roomP.textContent = room;
+  login.style.display = 'none';
+}
+
+
 
 
 

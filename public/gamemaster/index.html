@@ -10,6 +10,10 @@
         margin: 0 auto;
         }
 
+        body{
+            overscroll-behavior: contain;
+           
+        }
 
         #counter{
         background-color: aquamarine;
@@ -36,10 +40,22 @@
             border-radius: 10px;
         }
    
+        #login{
+            text-align: center;
+            background-color: aquamarine;
+        }
 
     </style>
 </head>
 <body>
+
+    <div id="login"> 
+        <input type="number" id="roomInp">
+        <button id='roomBtn'>Create Room</button>
+        
+    </div>
+
+    <p>RoomID: <span id='roomP'>000</span></p>
     <div id="counter">
         <p id='tall'>0</p>
     </div>
@@ -58,7 +74,11 @@
 
         }
 
-
+         const roomP = document.querySelector('#roomP');
+            const roomInp = document.querySelector('#roomInp');
+            const roomBtn = document.querySelector('#roomBtn');
+            let room;
+            const login = document.querySelector('#login');
 
 
         
@@ -86,12 +106,28 @@
                 let tall = a[r];
                 createListPoint(tall);
                 a.splice(r, 1);
-                sock.emit('message', brukt);
+                room = roomP.textContent;
+               
+                sock.emit('message', ({brukt, room}));
             }else{
                  p.textContent = 'Alle tallene er brukt opp';
             }
         }
         nyttSpill();
+
+       
+
+            roomBtn.onclick = () => {
+                room = roomInp.value;
+                if (room == '') {
+                    room = Math.floor(Math.random() * 999);
+                }
+                roomInp.value = ''; 
+                sock.emit('join_room', room);
+                roomP.textContent = room;
+                login.style.display = 'none';
+
+            }
 
 
     

@@ -82,11 +82,12 @@ const sock = io();
 const p = document.querySelector('#tallet');
 let tidligere = [];
 
-sock.on('message', (input) => {
-  p.textContent = input[0];
+sock.on('message', () => {
+  console.log(brukt);
+  p.textContent = brukt[0];
   liste.innerHTML = '';
-  for (const punkt in input) {
-    createListPoint(input[punkt]);
+  for (const punkt in brukt) {
+    createListPoint(brukt[punkt]);
   }
   
 });
@@ -100,7 +101,7 @@ roomBtn.onclick = () => {
   let room = roomInp.value;
   roomInp.value = '';
   if(room == ''){
-    room = 000;
+    room = 0;
   }
   sock.emit('join_room', room);
   roomP.textContent = room;
